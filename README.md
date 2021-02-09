@@ -1,4 +1,4 @@
-# nuxt-blog
+# Change Money App
 
 ## Build Setup
 
