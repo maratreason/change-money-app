@@ -8,29 +8,23 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 
+import { Currency } from "../../types/currency";
+import { FormControl, MenuItem, Select } from "@material-ui/core";
+
 const useStyles = makeStyles({
 	table: {
 		minWidth: 650,
 	},
 });
 
-const rows = [
-	{
-		id: 1,
-		name: "EUR",
-		current: 1
-	},
-	{
-		id: 1,
-		name: "EUR",
-		current: 1
-	}
-];
+interface PropTypes {
+	currencies: Currency;
+	current: string
+}
 
-const CurrencyTable = ({ currencies }: any) => {
+const CurrencyTable = ({ currencies, current }: PropTypes) => {
 	const classes = useStyles();
-
-	console.log(currencies);
+	const keys: Array<string> = Object.keys(currencies);
 
 	return (
 		<TableContainer component={Paper}>
@@ -38,20 +32,42 @@ const CurrencyTable = ({ currencies }: any) => {
 				<TableHead>
 					<TableRow>
 						<TableCell>Курсы валют</TableCell>
-						<TableCell align="right">Текущая валюта (EUR)</TableCell>
+						<TableCell align="right">
+							Текущая валюта
+
+							<FormControl variant="outlined">
+								<Select
+									value={current}
+									onChange={() => {}}
+								>
+									{keys.map((option: string) => {
+										return (
+											<MenuItem value={option} key={option}>
+												{option}
+											</MenuItem>
+										);
+									})}
+								</Select>
+							</FormControl>
+
+						</TableCell>
 						<TableCell align="right">Курс</TableCell>
 					</TableRow>
 				</TableHead>
 				<TableBody>
-					{rows.map((row) => (
-						<TableRow key={row.name}>
-							<TableCell component="th" scope="row">
-								{row.name}
-							</TableCell>
-							<TableCell align="right">{row.current}</TableCell>
-							<TableCell align="right">{row.current}</TableCell>
-						</TableRow>
-					))}
+					{
+						keys.map(k => {
+							return (
+								<TableRow key={k}>
+									<TableCell component="th" scope="row">
+										{k}
+									</TableCell>
+									<TableCell align="right">1</TableCell>
+									<TableCell align="right">{currencies[k]}</TableCell>
+								</TableRow>
+							)
+						})
+					}
 				</TableBody>
 			</Table>
 		</TableContainer>

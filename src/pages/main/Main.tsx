@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "../../../node_modules/axios/index";
-import CurrencyRow from "../CurrencyRow/CurrencyRow";
+import CurrencyRow from "../../components/CurrencyRow/CurrencyRow";
 import "./Main.less";
 
 const BASE_URL = "https://api.exchangeratesapi.io/latest";
